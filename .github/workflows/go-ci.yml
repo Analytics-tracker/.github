@@ -2,19 +2,26 @@ name: go-ci
 on:
   workflow_call:
     inputs:
-      go-version-file:
+      working-directory:
+        description: Thư mục chứa go.mod
         type: string
-        default: go.mod
+        default: .
 permissions:
   contents: read
 jobs:
   ci:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version-file: ${{ inputs.go-version-file }}
+          go-version-file: ${{ inputs.working-directory }}/go.mod
+          cache-dependency-path: ${{ inputs.working-directory }}/go.sum
       - uses: golangci/golangci-lint-action@v6
+        with:
+          working-directory: ${{ inputs.working-directory }}
       - run: go test -race -count=1 ./...
       - run: go build ./...
