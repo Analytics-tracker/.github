@@ -2,7 +2,11 @@
 <!-- Mô tả ngắn, liên kết issue: Closes #123 -->
 
 ## Loại
-- [ ] feat  - [ ] fix  - [ ] refactor  - [ ] docs  - [ ] chore
+- [ ] feat  
+- [ ] fix  
+- [ ] refactor  
+- [ ] docs  
+- [ ] chore
 
 ## Checklist
 - [ ] Test mới cho hành vi mới
